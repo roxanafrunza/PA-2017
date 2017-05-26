@@ -1,0 +1,46 @@
+Frunza Roxana 321CB
+
+Problema 1
+
+Pentru prima problema, sortez descrescator intervalele dupa limita superioara.
+Luam primul punct care nu este acoperit de un interval, cautam intervalul care
+il cuprinde si are capatul din dreapta cel mai mare. Dupa aceea, verificam 
+punctele urmatoare pentru a vedea cate puncte mai apartin acestui interval.
+Cand am ajuns la un punct din afara intervalului, iesim din for, modificam
+numarul de puncte ramase neacoperit. Acest algoritm se repeta pana cand nu mai
+avem puncte neacoperite. Acest algoritm este unul de tip Greedy deoarece mereu
+alegem intervalul care va acoperi cat mai multe puncte din cele neacoperit.
+Complexitatea buclei while este de O(n), iar a algoritmului de sortare (am
+folosit Collection.sort) este de O(nlogn). Deci complexitatea algoritmului
+este O(nlogn)
+
+Problema 2
+Rezolvarea problemei doi o rezolv folosind programarea dinamica. Solutiile
+subproblemelor sunt salvate intr-o matrice 2D, 3D respectiv 4D in functie
+de numarul de stringuri dat ca input. Pentru cazul n = 2, in matricea solutie
+pe pozitia (i,j) se afla 1 daca avem unul din urmatoarele doua cazuri:
+- substringul i+j-1 s-a putut forma din i caractere din primul string si j-1 din
+ cel de-al doilea si caracterul curent din rezultat este caracterul j din stringul 2
+- substringul i+j-1 s-a putut forma din i-1 caractere din primul string si j din 
+cel de-al doilea si caracterul curent din rezultat este caracterul i din stringul 1
+Acelasi algoritm se aplica si in cazul n = 3 si n = 4, doar ca sunt trebuie luate
+in considerare si substringurile din cel de-al treilea respectiv al patrulea sir.
+Solutia finala a problemei va fi ultimul element al matricii. 
+Complexitatea algoritmului este O(n*m) pentru n = 2, O(n*m*p) pentru n = 3 si 
+O(n*m*p*q) pentru n = 4 unde n = lungimea primului sir, m = lungimea sirului 2, 
+p = lungimea sirului 3 si q = lungimea sirului 4. 
+
+Problema 3
+Pentru a treia problema, citim coordonatele stropitorilor, si puterile. In
+momentul in care citim puterea, calculam si coordonata din stanga si coordonata
+din dreapta. Apoi, parcurgem in paralel cei doi vectori si verificam daca 
+stropitoarea poate fi pornita in stanga sau dreapta ( nu stropeste inafara
+stadionului sau peste stropitorile vecine). Rezultatele sunt pastrate in
+doi vectori boolean, unde pe pozitia i avem true/false daca stropitoarea
+poate sau nu stropi spre stanga sau spre dreapta. Parcurgem inca odata vectorul
+in care salvam stropitorile si verificam daca putem stropi in stanga, alegem 
+aceasta varianta. Altfel, daca putem stropi spre dreapta, alegem aceasta
+solutie. In final, daca nicio varianta nu este valida, stropitoarea va fi
+blocata. Salvam intr-o variabila punctul curent pana unde au ajuns stropitorile
+pentru a sti daca am alege sa stropim la stanga sa nu se intersecteze cu o 
+stropitoare care stropeste spre dreapta. Complexitatea algoritmului este O(n).

@@ -1,0 +1,36 @@
+Frunza Roxana 321CB
+
+Pentru implementarea grafului, am ales scheletul de la laborator 6.
+Graful este salvat ca o lista de adiacenta. Avem si un vector indegree
+unde salvam numarul de muchii care intra in fiecare nod.
+
+Problema 1
+Pentru a obtine o permutare a alfabetului care sa respecte cerintele impuse de
+ordinea cuvintelor din fisier, cream un graf cu 26 de noduri. Fiecare nod din graf corespunde unei litere din alfabet (0->a, 1->b etc). Cand citim cuvintele, comparam doua cate doua si cream muchii in graf pentru prima
+litera care difera in ambele cuvinte si sunt pe aceeasi pozitie care difera. In momentul in care verificam doua cuvinte, daca al doilea cuvant are o lungime mai mica decat primul cuvant si este o subsecventa a primului cuvant este evident ca nu exista o ordine a literelor care sa satisfaca aceasta conditie (de exemplu daca avem: banchet, ban  - nu avem o permutare posibila a literelor pentru care cuvantul banchet sa fie inaintea cuvantului ban). Daca nu am intalnit cazul descris anterior, sortam topologic muchiile. Am ales algoritmul lui Kahn descris in laboratorul 6. Verificam daca sortarea a esuat  (graful are cicli) si afisam fie "Imposibil" fie permutarea rezultate.
+Complexitate algoritm:
+n - numar de noduri
+m - numar de muchii
+Citire si creare graf: O(n) - chiar daca parcurgem cuvintele doua cate doua in for-ul de citire, s-a specificat in enuntul temei ca un cuvant are maxim 100 de caractere. Complexitatea ar fi O(100*n) care asimptotic este O(n).
+Sortarea topologica: O(n+m)
+Complexitate finala: O(n+n)
+
+
+Problema 3
+Cream graful pe baza datelor de input si salvez in matricea isPath daca exista
+muchie intre fiecare nod. Parcurgem BFS graful pentru a ne crea un vector de distante unde se salveaza distanta de la fiecare nod la nodul sursa. Codul
+la BFS este pe baza pseudocodului din laborator numai ca nu salvam si vectorul
+de parinti. Dupa ce am aflat vectorul de distante, trebuie reconstruite caile
+care leaga nodul sursa de nodul destinatie. Avem o functie recursiva, care
+porneste de la nodul destinatie. Parcurge toate nodurile si pentru acelea fata
+de care se afla la o distanta de 1 (adica sunt vecini), mergem recursiv cu nodul vecin. La inceputul functiei adaugam mereu nodul dat ca parametru functiei in coada. Daca am ajuns la un nod care are distanta 0 inseamna ca am ajuns la sursa, deci am creat o cale completa pe care o adaugam in lista de cai minime posibile. Cand ne intoarcem din recursivitate, nodul este scos din calea curenta. 
+Prin aplicarea acestui algoritm rezulta doar caile distincte (nu tine cont de faptul ca pot exista muchii multiple intre aceleasi noduri). Pentru a calcula numarul total de cai minime, parcurgem fiecare cale. Avem un produs care initial este 1 si pentru fiecare muchie din cale, il inmultim cu numarul de aparitii al muchie respective in graf. Adunand produsele pentru fiecare cale obtinem numarul total de cai minime.
+Pentru a calcula nodul care ar duce la cea mai mare medie de strazi luminate,
+avem un vector unde salvam numarul de muchii care intru sau ies dintr-un nod pentru o anumita cale si pentru toate caile. Pentru a calcula vectorul cu numarul de muchii pentru toate caile, inmultim numarul de muchii pentru o cale cu produsul descris in paragraful anterior si adunam la valoarea curenta din vector. Alegem valoarea maxima din vector (adica nodul prin care trec cele mai multe muchii din toate caile minime) si calculam media.
+Complexitate algoritm:
+n - numar noduri
+m - numar muchii
+Complexitate citire si creare graf: O(m)
+Complexitate BFS: O(n+m)
+Complexitate calcul cai minime: O(n*m)
+Complexitate calcul vectori: O(n*n)
