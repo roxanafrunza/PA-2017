@@ -1,0 +1,56 @@
+Echipa: 4PArtitions
+Capitan: Frunza Roxana
+Membri Echipa: Bucur Stefania, Georgian Andreea, Marin Corina
+321CB
+
+UPDATE ETAPA 2:
+La bot-ul implementat in etapa 1, am adus cateva imbunatatiri:
+- pentru patratele cu putere mica, alegem sa stam pana cand strength este
+mai mare decat 4 * production
+- am observat ca daca calculam vecinii pe o raza mai mica (2 in in loc de 3)
+ne extindem mai repede
+- am adaugat o metoda care considera o locatie ca fiind sigura daca cei 4 vecini
+din directiile permise ne apartin
+- algoritmul de la prima etapa, il aplicam doar daca pe o raza de doua patratele
+nu avem niciun inamic. Altfel, alegem sa mergem spre cel mai apropiat inamic
+
+ETAPA 1:
+		
+Pentru implementarea proiectului nostru, pe langa clasele existente in Java 
+starter pack, am creat si o alta clasa, numita MyMap care contine algoritmul
+nostru de alegere a mutarii. De asemenea, pentru sortarea eficienta in functie 
+de strength, production sau strength/production, am implementat clasele
+StrengthComparator, ProductionComparator si MyComparator. 
+
+Pentru cucerirea intregii harti, intr-un mod cat mai eficient, folosim o
+strategie Greedy. Avem o clasa MyMap in care sunt pastrate toate locatiile
+detinute de bot-ul nostru. Acestea sunt sortate descrescator in functie de strength. 
+Am ales sa folosim o euristica, prin care anticipam puterea care se va acumula 
+intr-o locatie. Astfel, in functie de mutarile care se vor efectua spre locatia 
+respectiva, putem decide daca o anumita mutare este valida sau nu. Pentru locatiile 
+cu putere mica, alegem sa stam pe loc pana se aduna o putere mai mare. 
+Incercand mai multe variante, am ajuns la concluzia ca restrictiile impuse reduc 
+numarul de frame-uri.
+
+Pentru fiecare locatie, luam in calcul vecinii pe o raza de 3 patratele in fiecare 
+directie. Daca vecinii ne apartin deja, cautam cea mai apropiata granita si mergem 
+in directia ei. Daca in apropierea noastra sunt diviziuni pe care nu le detinem, 
+verificam daca avem putere suficienta pentru a ocupa unul din vecinii de pe 
+directiile permise. Mereu alegem vecinul cel mai puternic.
+
+Pentru cazul in care nu puteam alege niciunul dintre vecinii imediati, ne-am gandit 
+la o strategie de calculare a sumei fiecarei laturi din jurul locatiei curente. 
+Alegem cea mai mare suma si ne deplasam in directia acesteia.
+
+Acest algoritm il aplicam la fiecare frame, pentru fiecare locatie pe care o detinem.
+
+La realizarea acestei etape, fiecare membru a contribuit in mod egal. Pentru inceput, 
+ne-am familiarizat cu jocul si regulile acestuia si am incercat sa aducem o strategie 
+de ocupare a hartii intr-un mod cat mai eficient. Am studiat algoritmul [1] implementat 
+de unul dintre participantii din competitia oficiala  si am combinat ideile noastre cu 
+strategia aplicata de acesta. De asemenea, am urmarit si toate explicatiile de pe 
+forum-ul pus la dispozitie.
+
+
+
+[1] https://github.com/jheilema-nerdery/HaliteBot/tree/master/files/bot_mk12 
